@@ -1,5 +1,5 @@
 import "./index.css";
-import App from "./componets/App/App.tsx";
+import App from "./components/App/App";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

@@ -7,7 +7,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal = ({ onClose, children }: ModalProps) => {
+export default function Modal({ onClose, children }: ModalProps) {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -15,32 +15,28 @@ const Modal = ({ onClose, children }: ModalProps) => {
   };
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
         onClose();
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [onClose]);
 
   return createPortal(
     <div
-      onClick={handleBackdropClick}
       className={css.backdrop}
       role="dialog"
       aria-modal="true"
+      onClick={handleBackdropClick}
     >
       <div className={css.modal}>{children}</div>
     </div>,
     document.body,
   );
-};
-
-export default Modal;
+}
