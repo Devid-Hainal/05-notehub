@@ -27,7 +27,7 @@ const NoteSchema = Yup.object().shape({
     .max(50, "Title must be at most 50 characters")
     .required("Title is required"),
 
-  content: Yup.string().max(500, "Too Long!").required("Content is required"),
+  content: Yup.string().max(500, "Too Long!"),
 
   tag: Yup.mixed<NoteTag>()
     .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"], "Invalid tag")
